@@ -1,38 +1,340 @@
-.App {
-  text-align: center;
+/* Genel Stiller */
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f3f4f6;
+  color: #333;
+  line-height: 1.6;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+h1, h2, h3 {
+  color: #1e3a8a;
+}
+
+/* Header */
+header {
+  background: linear-gradient(45deg, #1e3a8a, #2563eb);
   color: white;
+  padding: 1.2rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 100;
 }
 
-.App-link {
-  color: #61dafb;
+header nav a {
+  margin-right: 1.5rem;
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: white;
+  transition: color 0.3s ease, transform 0.2s ease;
 }
 
-@keyframes App-logo-spin {
+header nav a:hover {
+  color: #facc15;
+  transform: scale(1.1);
+}
+
+header nav a.active {
+  color: #2563eb;
+  border-bottom: 2px solid #facc15;
+}
+
+/* Footer */
+footer {
+  background: linear-gradient(45deg, #1e3a8a, #2563eb);
+  color: white;
+  text-align: center;
+  padding: 2rem 1rem;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+footer p {
+  font-size: 1.2rem;
+  letter-spacing: 0.5px;
+  color: #f3f4f6;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+footer a {
+  color: #facc15;
+  font-weight: bold;
+}
+
+footer a:hover {
+  color: #1e3a8a;
+  text-decoration: underline;
+}
+
+/* Ürün Kartları */
+/* Ürün Kartları Düzeni */
+.product-card {
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  padding: 1rem;  /* Küçültülmüş padding */
+  text-align: center;
+  background-color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.4s ease, box-shadow 0.3s ease;
+  position: relative;
+  width: 30%; /* Ürün kartlarının genişliğini yüzdeyle belirledik */
+  margin-bottom: 2rem; /* Alt kısımdan boşluk bırakıldı */
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.product-card img {
+  max-width: 100%;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  transition: transform 0.2s ease;
+}
+
+.product-card img:hover {
+  transform: scale(1.1);
+}
+
+.product-card h3 {
+  font-size: 1.2rem; /* Başlık boyutunu biraz küçülttük */
+  margin: 1rem 0;
+  font-weight: bold;
+  color: #1e3a8a;
+  text-transform: uppercase;
+}
+
+.product-card p {
+  color: #10b981;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 1.2rem;
+}
+
+.product-card button {
+  background-color: #1e3a8a;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-size: 1rem;
+}
+
+.product-card button:hover {
+  background-color: #2563eb;
+  transform: scale(1.1);
+}
+
+.product-card button:active {
+  transform: scale(0.95);
+}
+
+.product-card p, .product-card button {
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.product-card:hover p {
+  color: #facc15;
+  transform: translateY(-5px);
+}
+
+.product-card:hover button {
+  background-color: #facc15;
+  color: #1e3a8a;
+  transform: translateY(5px);
+}
+
+/* Ürün Kartlarını Düzenlemek İçin Flexbox Kullan */
+.product-list {
+  display: flex;
+  flex-wrap: wrap; /* Kartların satırlara yerleşmesini sağlamak için */
+  gap: 2rem; /* Kartlar arasında boşluk */
+  justify-content: space-between;
+}
+
+
+
+/* Animasyonlar */
+@keyframes fadeIn {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: translateY(30px);
   }
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.product-card {
+  animation: bounceIn 1s ease-out;
+}
+
+header, footer {
+  animation: fadeIn 1s ease-out;
+}
+
+/* Scroll Animations */
+@keyframes slideUp {
+  from {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.scroll-animate {
+  animation: slideUp 1s ease-out;
+}
+
+/* Kullanıcı Sayfası */
+.user-page {
+  background: #f9f9f9;
+  padding: 3rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 2rem auto;
+}
+
+.user-page .title {
+  font-size: 2.5rem;
+  color: #2563eb;
+  margin-bottom: 1rem;
+}
+
+.user-page .profile-info h3 {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  color: #1e3a8a;
+}
+
+.user-page ul {
+  list-style: none;
+  padding: 0;
+}
+
+.user-page ul li {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Sepet Sayfası */
+.cart-page {
+  padding: 2rem;
+  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.cart-page .cart-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.cart-page .cart-item img {
+  max-width: 100px;
+  border-radius: 8px;
+  margin-right: 1rem;
+}
+
+.cart-page .cart-item h3 {
+  font-size: 1.4rem;
+  color: #2563eb;
+}
+
+.cart-page .total {
+  font-size: 1.5rem;
+  color: #2563eb;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+.cart-page button {
+  background-color: #10b981;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: background-color 0.3s ease;
+}
+
+.cart-page button:hover {
+  background-color: #1e3a8a;
+}
+
+/* Responsive Tasarım */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  header nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .product-card {
+    padding: 1rem;
+    margin-bottom: 20px;
+    width: 90%;
+    box-sizing: border-box;
+  }
+
+  .product-card img {
+    max-width: 80%;
+  }
+
+  footer {
+    padding: 1rem 0;
   }
 }
